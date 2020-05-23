@@ -159,8 +159,30 @@ FROM funcionarios
 GROUP BY cidade                            # além de agrupar por cidade
 HAVING SUM(salario) > 2000;                # teremos um filtro após o agrupamento
 
-# podemos aplicar cláusula HAVING ao GROUP BY para filtrar pelo AGRUPAMENTO
+#Ppodemos aplicar cláusula HAVING ao GROUP BY para filtrar através do AGRUPAMENTO
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
+                                                     # CRIANDO 2° ÍNDICE
 
+CREATE INDEX cidade_idx   # criar índice
+ON funcionarios (cidade); # na tabela funcionários, na coluna cidade
+
+SHOW INDEX
+FROM funcionarios; 
+
+--------------------------------------------------------------------------------------------------------------------------------------
+                    
+                                      # CRIAR CÓPIA DE TABELA BACK-UP - MUITO ÚTIL
+
+CREATE TABLE funcionarios_bkp 
+AS SELECT * FROM funcionarios; 
+
+DROP TABLE funcionarios_bkp;
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+                                                # APAGAR BANCOS DE DADOS
+
+DROP DATABASE titanicDB;
+DROP DATABASE funcionariosDB;
