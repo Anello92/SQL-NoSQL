@@ -3,20 +3,25 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-# Big Data na Prática 4 - Customer Churn Analytics 
+Customer Churn Analytics 
 
 --------------------------------------------------------------------------------------------------------------------------------------
-                                                          #  ATENÇÂO 
+                                                          #  ALGORITMO 
 -------------------------------------------------------------------------------------------------------------------------------------- 
 
-# Nós temos mais de 60 algoritmos de machine learning. O algoritmo nada mais é do que uma sequência de etapas a executar para resolver um determinado problema. Quando executamos um algoritmo de Machine Learning, teremos uma fórmula matemática. Porém precisamos preencher esta fórmula matemática com suas variáveis. 
+# Nós temos mais de 60 algoritmos de machine learning. 
+# O algoritmo nada mais é do que uma sequência de etapas a executar para resolver um determinado problema. 
+# Quando executamos um algoritmo de Machine Learning, teremos uma fórmula matemática. 
+# Portanto, precisamos preencher esta fórmula matemática com suas variáveis. 
 
-# Para que possamos TREINAR este algoritmo e extrairmos essa função completa, primeiramente alimentamos o algoritmo com dados e durante o treinamento do algoritmo ele encontrará os melhores coeficientes que ajudam a complementar essa fórmula matemática. 
+# Para que possamos TREINAR este algoritmo e extrairmos essa função completa
+# primeiramente alimentamos o algoritmo com dados e durante o treinamento do algoritmo 
+# o algoritmo encontrará os melhores coeficientes que ajudam a complementar essa fórmula matemática. 
 
-# Portanto, o algoritmo é uma fórmula que preenchemos por parte com dados e a outra parte da fórmula ele aprenderá sozinho durante o treinamento e então encontrar sozinhos os coeficientes. Ao final do treinamento do algoritmo, nós temos um modelo preditivo, uma espécie de fórmula matemática já preenchida. A partir disto faremos previsões.
-
-# Já temos os coeficientes, não precisamos treinar o modelo novamente, o que será necessário mudar ná fórmula então? Os dados. Portanto, usamos os dados de treino para treinar o algoritmo e encontrar os coeficientes, depois que ele encontra alimentamos esse modelo com novos dados e com os os coeficientes fazemos previsões
-
+# O algoritmo é uma fórmula que preenchemos por parte com dados
+# a outra parte da fórmula ele aprenderá sozinho durante o treinamento e então encontrar sozinhos os coeficientes. 
+# Ao final do treinamento do algoritmo, nós temos um modelo preditivo:
+# uma fórmula matemática já preenchida. A partir disto faremos previsões.
 --------------------------------------------------------------------------------------------------------------------------------------
 # A rotatividade (churn) de clientes ocorre quando clientes ou assinantes param de fazer negócios com uma empresa ou serviço. 
 # Também é conhecido como perda de clientes ou taxa de cancelamento.
