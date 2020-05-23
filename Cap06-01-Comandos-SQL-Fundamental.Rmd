@@ -34,14 +34,16 @@ output: html_notebook
 # Atenção a como ajustar o PARSER|OPTIMIZER do SGBD para que a query seja executada de forma mais eficiente. 
 
 --------------------------------------------------------------------------------------------------------------------------------------
-
                                                   # TIPOS DE INSTRUÇÔES SQL
 
-# Data Definition Language (DDL): linguagem responsável pela definição dos dados, criar objetos. Comandos para criar um objeto, tabela ou índica CREATE, alterar um objeto, tabela ALTER, e deletar um objeto DROP. CRIAR OBJETOS
+# Data Definition Language (DDL): linguagem responsável pela definição dos dados, CRIAR objetos. 
+# Comandos para criar um objeto CREATE, alterar um objeto ALTER e deletar um objeto DROP. 
 
-# Data Manipulation Language (DML): linguagem de manipulação de dados. Comandos para secionar dados SELECT, inserir dados INSERT, deletar datos DELETE, atualizar UPDATE. MANIPULAR DADOS
+# Data Manipulation Language (DML): linguagem de manipulação de dados. MANIPULAR DADOS
+# Comandos para secionar dados SELECT, inserir dados INSERT, deletar datos DELETE, atualizar UPDATE. 
 
-# Data Control Language (DCL): definir permissões de acesso às tabelas, colunas e registros. TRABALHAR DIRETAMENTE COM PRIVILÉGIOS DE ACESSO. 
+# Data Control Language (DCL): definir permissões de acesso às tabelas, colunas e registros. 
+# TRABALHAR DIRETAMENTE COM PRIVILÉGIOS DE ACESSO. 
 
 --------------------------------------------------------------------------------------------------------------------------------------
                                                        # COMANDOS 
