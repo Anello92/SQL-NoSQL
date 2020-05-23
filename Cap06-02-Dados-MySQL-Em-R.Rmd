@@ -37,7 +37,6 @@ con = dbConnect(MySQL(), # aponta abertura de conexão com MySQL
                  
 --------------------------------------------------------------------------------------------------------------------------
 
-
 # Query para retornar subset de dados desejado
 qry <- "select pclass,  survived, avg(age) as media_idade
 FROM titanic 
@@ -51,18 +50,15 @@ dbGetQuery(con, qry)    # para executar a query anterior em um banco de dados
 
 --------------------------------------------------------------------------------------------------------------------------
 
-
 # Plot
 dados <- dbGetQuery(con, qry) # executando a mesma query salvando no objeto dados
 head(dados)                   
 class(dados)                  # classe dataframe advindo da tabela do BDR
 ggplot(dados, aes(pclass, media_idade)) + geom_bar(stat = "identity") 
 
-
 --------------------------------------------------------------------------------------------------------------------------
 
-                              # OUTRA FORMA DE ACESSAR MySQL
-
+                                              # OUTRA FORMA DE ACESSAR MySQL
 
 # Conectando no MySQL com dplyr
 ?src_mysql
@@ -80,7 +76,6 @@ dados2 <- con2 %>%                             #dentro de con2
   collect()
 
 head(dados2)
-
 --------------------------------------------------------------------------------------------------------------------------
 
 # Manipulando dados
@@ -92,7 +87,6 @@ dados2 <- con2 %>%
   collect() 
 
 View(dados2)
-
 --------------------------------------------------------------------------------------------------------------------------
 
 # Plot
@@ -110,6 +104,5 @@ dados2 <- con2 %>%
             avg_fare = avg(fare))
 
 head(dados2)
-
 
 # --> Para outros bancos de dados, use RODBC
