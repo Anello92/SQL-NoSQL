@@ -22,23 +22,20 @@ output: html_notebook
 
 #db-engines.com - ranking dos principais bancos de dados do mercado 
 --------------------------------------------------------------------------------------------------------------------------------------
+                                                       # LINGUAGEM SQL
+                                                       
+# Linguagem SQL é uma linguagem de cosulta a bancos de dados - não é uma linguagem de programação. 
+# Permite que os usuários acessem dados em sistemas de gerenciamento de bancos de dados relacionais. 
 
-# Linguagem SQL é uma linguagem de cosulta a bancos de dados - não é uma linguagem de programação. Permite que os usuários acessem dados em sistemas de gerenciamento de bancos de dados relacionais. 
+# Manipualação de dados armazenados em bancos de dados
+# Criação e remoção de objetos no banco de dados (tabelas, índices, visões, procedimentos armazenados),
+# Definição de privilégios e restrições de acesso a dados sensíveis. 
 
-# Permite a manipualação de dados armazenados em bancos de dados, a criação e remoção de objetos no banco de dados (tabelas, índices, visões, procedimentos armazenados), definir privilégios e restrições de acesso a dados sensíveis. 
-
-# Trabalhamos diretamente com os dados armazenados no banco de dados, interagindo através de um sistema SGBD. O sistema SGBD processa a query do usuário e retorna os dados solicitados. 
-
-# Atenção a como ajustar o Parser|Optimizer do SGBD para que a query seja executada de forma mais eficiente. 
-
-# Tudo que fazemos no banco de dados, passa pelo SGBD.
-# Oraacle utiliza PL/SQL
-# MS Access utiliza o JET SQL
-# MS SQL Server utiliza T-SQL
+# Atenção a como ajustar o PARSER|OPTIMIZER do SGBD para que a query seja executada de forma mais eficiente. 
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
-# Existem 3 tipos de instrução SQL:
+                                                  # TIPOS DE INSTRUÇÔES SQL
 
 # Data Definition Language (DDL): linguagem responsável pela definição dos dados, criar objetos. Comandos para criar um objeto, tabela ou índica CREATE, alterar um objeto, tabela ALTER, e deletar um objeto DROP. CRIAR OBJETOS
 
@@ -47,7 +44,7 @@ output: html_notebook
 # Data Control Language (DCL): definir permissões de acesso às tabelas, colunas e registros. TRABALHAR DIRETAMENTE COM PRIVILÉGIOS DE ACESSO. 
 
 --------------------------------------------------------------------------------------------------------------------------------------
-                                                  # COMANDOS 
+                                                       # COMANDOS 
                                                   
 SHOW databases; # mostrará todos os bancos de dados que estão neste servidor|instância
 
