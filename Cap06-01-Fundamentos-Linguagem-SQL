@@ -115,7 +115,7 @@ FROM funcionários;
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
-                                                       #MUITO CUIDADO - UPDATE
+                                                   #MUITO CUIDADO - UPDATE
 
 UPDATE funcionarios                       # selecionar tabela para atualizar dado
 SET cidade = "LAZIO"                      # definir mudança
@@ -123,14 +123,14 @@ WHERE id = 1;                             # especificar chave de identificação
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
-                                                       #MUITO CUIDADO - DELETE
+                                                    #MUITO CUIDADO - DELETE
 DELETE FROM funcionarios
 WHERE id = 6;                        
 
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
-                                                          #VALORES ÚNICOS
+                                                       #VALORES ÚNICOS
 
 SELECT DISTINCT cidade
 FROM funcionarios; 
@@ -152,7 +152,7 @@ GROUP BY cidade;                           # agrupar pela coluna que não está 
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
-                                                         #HAVING
+                                                          #HAVING
 
 SELECT cidade, SUM(salario) 
 FROM funcionarios
@@ -163,7 +163,7 @@ HAVING SUM(salario) > 2000;                # teremos um filtro após o agrupamen
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
-                                                     # CRIANDO 2° ÍNDICE
+                                                    # CRIANDO 2° ÍNDICE
 
 CREATE INDEX cidade_idx   # criar índice
 ON funcionarios (cidade); # na tabela funcionários, na coluna cidade
@@ -173,7 +173,7 @@ FROM funcionarios;
 
 --------------------------------------------------------------------------------------------------------------------------------------
                     
-                                      # CRIAR CÓPIA DE TABELA BACK-UP - MUITO ÚTIL
+                                         # CRIAR CÓPIA DE TABELA BACK-UP - MUITO ÚTIL
 
 CREATE TABLE funcionarios_bkp 
 AS SELECT * FROM funcionarios; 
@@ -182,7 +182,7 @@ DROP TABLE funcionarios_bkp;
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
-                                                # APAGAR BANCOS DE DADOS
+                                                 # APAGAR BANCOS DE DADOS
 
 DROP DATABASE titanicDB;
 DROP DATABASE funcionariosDB;
