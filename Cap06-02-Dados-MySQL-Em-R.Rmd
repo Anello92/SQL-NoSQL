@@ -1,0 +1,115 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Carregando e Analisando Dados do MySQL com Linguagem R
+
+# Nós vamos acessar o banco de dados mySQL com R
+    # Trazer os dados para o RSTUDIO
+        # Analisar, manipular e plotar com esses dados
+
+--------------------------------------------------------------------------------------------------------------------------
+
+install.packages('RMySQL')      # Pacote para acessar MySQL
+install.packages("ggplot2")     # Pacote para plotar
+install.packages("dbplyr")      # DataBase Plyr - contém driver necessário para conectar em BD relacional 
+library(RMySQL)
+library(ggplot2)
+library(dbplyr)
+library(dplyr)
+
+--------------------------------------------------------------------------------------------------------------------------
+
+# Antes de trabalhar com MySQL e R, acessar o shell do MySQL (no prompt ou terminal) e digite:
+
+# ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'dsa1234';
+
+--------------------------------------------------------------------------------------------------------------------------
+
+# Conexão com o banco de dados
+?dbConnect #esta função que faz conexão ao DBMS - DBI {RMySQL}
+con = dbConnect(MySQL(), # aponta abertura de conexão com MySQL
+                user = "root", 
+                password = "dsa1234",
+                dbname = "titanicDB",
+                host = "localhost") # não é necessario ter o mySQL instalado na mesma maquina do RStudio
+                 
+--------------------------------------------------------------------------------------------------------------------------
+
+
+# Query para retornar subset de dados desejado
+qry <- "select pclass,  survived, avg(age) as media_idade
+FROM titanic 
+WHERE survived = 1              # apenas onde sobrevivente for = 1 (sobrevivente)
+GROUP BY pclass, survived;"     # agrupamento por classe e sobrevivente - TUDO ENTRE ASPAS POR SER UMA QUERY
+
+
+dbGetQuery(con, qry)    # para executar a query anterior em um banco de dados
+            # aponto a conexão "con"
+                 # qual query queremos executar
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+# Plot
+dados <- dbGetQuery(con, qry) # executando a mesma query salvando no objeto dados
+head(dados)                   
+class(dados)                  # classe dataframe advindo da tabela do BDR
+ggplot(dados, aes(pclass, media_idade)) + geom_bar(stat = "identity") 
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+                              # OUTRA FORMA DE ACESSAR MySQL
+
+
+# Conectando no MySQL com dplyr
+?src_mysql
+con2 <- src_mysql(dbname = "titanicdb", 
+                  user = "root", 
+                  password = "dsa1234", 
+                  host = "localhost")
+
+
+# Coletando e agrupando os dados
+dados2 <- con2 %>%                             #dentro de con2
+  tbl("titanic") %>%                           #acessar tabela titanic
+  select(pclass, sex, age, survived, fare) %>% #select das variáveis
+  filter(survived == 0) %>%
+  collect()
+
+head(dados2)
+
+--------------------------------------------------------------------------------------------------------------------------
+
+# Manipulando dados
+dados2 <- con2 %>%
+  tbl("titanic") %>%
+  select(pclass, sex, survived) %>%
+  group_by(pclass, sex) %>%
+  summarise(survival_ratio = avg(survived)) %>%
+  collect() 
+
+View(dados2)
+
+--------------------------------------------------------------------------------------------------------------------------
+
+# Plot
+ggplot(dados2, aes(pclass,survival_ratio, color=sex, group=sex)) +
+  geom_point(size=3) + geom_line()
+
+
+# Sumarizando os dados
+dados2 <- con2 %>%
+  tbl("titanic") %>% 
+  filter(fare > 150) %>%
+  select(pclass,sex,age,fare) %>%
+  group_by(pclass,sex) %>% 
+  summarise(avg_age = avg(age),
+            avg_fare = avg(fare))
+
+head(dados2)
+
+
+# --> Para outros bancos de dados, use RODBC
