@@ -10,7 +10,6 @@ output: html_notebook
         # Analisar, manipular e plotar com esses dados
 
 --------------------------------------------------------------------------------------------------------------------------
-
 install.packages('RMySQL')      # Pacote para acessar MySQL
 install.packages("ggplot2")     # Pacote para plotar
 install.packages("dbplyr")      # DataBase Plyr - contém driver necessário para conectar em BD relacional 
@@ -18,7 +17,6 @@ library(RMySQL)
 library(ggplot2)
 library(dbplyr)
 library(dplyr)
-
 --------------------------------------------------------------------------------------------------------------------------
 
 # Antes de trabalhar com MySQL e R, acessar o shell do MySQL (no prompt ou terminal) e digite:
