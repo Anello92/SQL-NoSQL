@@ -1,0 +1,154 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+# Trabalhando com R e SQLite 
+
+# Muitas apps rodam SQL para gravar e registrar seus dados
+# Leve a fácil de usar
+# Não é necessário instalação com linguagem R
+
+-------------------------------------------------------------------------------------------
+
+# Instalar Pacote SQLite
+install.packages("RSQLite")
+library(RSQLite)
+
+
+# Remover o banco SQLite, caso exista - Não é obrigatório
+system("del exemplo.db") # --> no Windows
+# system("rm exemplo.db")    # --> no Mac e Linux
+
+-------------------------------------------------------------------------------------------
+
+# Criando driver e conexão ao banco de dados para SQLite
+
+drv = dbDriver("SQLite")
+con = dbConnect(drv, dbname = "criando_db.db") # criando e abrindo conexao com banco de dados
+dbListTables(con) # função para listar as tabelas nessa conexão (ainda não temos)
+
+# banco de dados é criado no diretório atual getwd() do R
+
+-------------------------------------------------------------------------------------------
+
+# Criando uma tabela e carregando com dados do dataset mtcars
+dbWriteTable(con, "nova_tabela", mtcars, row.names = TRUE)
+# Esta função gravará uma tabela no banco de dados "criando_db.db"
+# Abrimos a conexão com "con", damos nome à nova tabela
+# Gravamos o dataset mtcars à "nova_tabela"
+# row.names = TRUE para que possamos gravar a tabela em dbWriteTable
+
+
+        # Neste momento temos uma tabela grava no novo banco de dados do SQLite
+
+-------------------------------------------------------------------------------------------
+
+dbListTables(con) # função para listar tabelas disponíveis no banco de dados
+
+dbExistsTable(con,"mtcars") # perguntar ao SQLite se existe tabela com nome "mtcars"
+dbExistsTable(con,"mtcars2")
+
+dbListFields(con,"mtcars")  # função para listar os campos|colunas desta tabela   
+dbReadTable(con, "mtcars")  # função para ler o conteúdo da tabela
+
+-------------------------------------------------------------------------------------------
+
+# Criando apenas a definição da tabela, desejamos apenas a ESTRUTURA e não os dados
+
+dbWriteTable(con, "mtcars2", mtcars[0, ], row.names = TRUE)
+dbListTables(con)
+dbReadTable(con, "mtcars2")
+
+-------------------------------------------------------------------------------------------
+
+# Executando consultas no banco de dados, executar consultas SQL
+query = "select row_names from mtcars"  # criar uma query|string
+rs = dbSendQuery(con, query)            # dbSendQuery para enviar a "query" ao BD em "con" 
+# o resultado deste envio sera em "rs" result-set
+
+dados = fetch(rs, n = -1) #navegaremos por este result-set e gravar no objeto dados
+# para gravar em dados aplicar função fetch() 
+dados # teremos o conjunto de dados apenas da query que executamos
+class(dados)
+
+-------------------------------------------------------------------------------------------
+
+# Executando consultas no banco de dados 
+query = "select disp, hp from mtcars where disp > 160" #query"
+rs = dbSendQuery(con, query) 
+dados = fetch(rs, n = -1) # fetch para retornar os dados e gravar no data frame
+dados
+
+-------------------------------------------------------------------------------------------
+
+# Executando consultas no banco de dados com groupy by
+query = "select row_names, avg(hp) from mtcars group by row_names"
+rs = dbSendQuery(con, query)
+dados = fetch(rs, n = -1) # fetch para retornar os dados e gravar no data frame
+dados
+
+-------------------------------------------------------------------------------------------
+
+# Executando consultas no banco de dados - gravando linha a linha
+query = "select row_names from mtcars"
+rs = dbSendQuery(con, query)
+while (!dbHasCompleted(rs)) # enquanto não tivermos concluido o result-set, imprimir linha  a linha
+    
+{
+  dados = fetch(rs, n = 1)
+  print(dados$row_names)
+}
+
+-------------------------------------------------------------------------------------------
+
+# Criando uma tabela a partir de um arquivo
+dbWriteTable(con, "iris", "iris.csv", sep = ",", header = T)
+dbListTables(con)
+dbReadTable(con, "iris")
+
+-------------------------------------------------------------------------------------------
+
+# Encerrando a conexão
+dbDisconnect(con)
+
+-------------------------------------------------------------------------------------------
+
+# Carregando dados no banco de dados
+# http://dados.gov.br/dataset/iq-indice-nacional-de-precos-ao-consumidor-amplo-15-ipca15
+# Criando driver e conexão ao banco de dados
+drv = dbDriver("SQLite")
+con = dbConnect(drv, dbname = "exemplo.db")
+
+dbWriteTable(con,"indices", "indice.csv",
+              sep = "|", header = T)
+
+dbRemoveTable(con, "indices")
+
+dbWriteTable(con,"indices", "indice.csv",
+             sep = "|", header = T)
+
+dbListTables(con)
+dbReadTable(con, "indices")
+
+df <- dbReadTable(con, "indices")
+df
+str(df)
+sapply(df, class)
+
+hist(df$setembro)
+df_mean <- unlist(lapply(df[, c(4, 5, 6, 7, 8)], mean))
+df_mean
+
+dbDisconnect(con)
+
+
+
+
+
+
+
+
+
+
