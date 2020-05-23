@@ -46,7 +46,7 @@ output: html_notebook
 # TRABALHAR DIRETAMENTE COM PRIVILÉGIOS DE ACESSO. 
 
 --------------------------------------------------------------------------------------------------------------------------------------
-                                                       # COMANDOS 
+                                                         # COMANDOS 
                                                   
 SHOW databases; # mostrará todos os bancos de dados que estão neste servidor|instância
 
