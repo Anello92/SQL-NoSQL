@@ -7,19 +7,20 @@ output: html_notebook
 
 -------------------------------------------------------------------------------------------------------------------------------------
 
-# Um banco de dados relacional é um conjunto de arquivos físicos que armazenam os dados em formato estruturado, organizados em tabelas, que por sua vez são divididas em linhas e colunas. A criação de um banco de dados relacional é baseada na MODELAGEM RELACIONAL. 
+# Banco de Dados Relacional são conjunto de arquivos físicos que armazenam os dados em:
+# formato estruturado, organizados em tabelas, que por sua vez são divididas em linhas e colunas.
 
-# Usamos linguagem SQL para manipular os dados em um banco de dados relacional para manipular os dados. Concentrar em aprender a linguagem SQL em si. 
+# A criação de um banco de dados relacional é baseada na MODELAGEM RELACIONAL. 
+
+# Usamos linguagem SQL para manipular os dados em um banco de dados relacional para manipular os dados. 
+# Concentrar em aprender a LINGUAGEM SQL em si. 
 
 # A linguagem R suporta diversos bancos de dados relacionais através de PACOTES específicos para cada banco de dados. 
 
-# Usamos um SGBD|RDBMS (sistema gerenciador de bancos de dados) para gerenciar os arquivos do banco de dados. Na prática os bancos de dados são muito parecidos, o que vai mudar é o SGBD da forma que cada banco é gerenciado por seus DBAs. 
-
-# Temos uma tabela para cada tipo de informação diferente, em algum momentos queremos relacionar informações entre tabelas diferentes
+# Usamos um SGBD|RDBMS (sistema gerenciador de bancos de dados) para gerenciar os arquivos do banco de dados.
+# Na prática os bancos de dados são similares, o que muda é o SGBD e forma como cada banco é gerenciado por seus DBAs. 
 
 #db-engines.com - ranking dos principais bancos de dados do mercado 
-#armazenagem de dados para aplicações em geral são/ em mySQL
-
 --------------------------------------------------------------------------------------------------------------------------------------
 
 # Linguagem SQL é uma linguagem de cosulta a bancos de dados - não é uma linguagem de programação. Permite que os usuários acessem dados em sistemas de gerenciamento de bancos de dados relacionais. 
@@ -46,7 +47,8 @@ output: html_notebook
 # Data Control Language (DCL): definir permissões de acesso às tabelas, colunas e registros. TRABALHAR DIRETAMENTE COM PRIVILÉGIOS DE ACESSO. 
 
 --------------------------------------------------------------------------------------------------------------------------------------
-
+                                                  # COMANDOS 
+                                                  
 SHOW databases; # mostrará todos os bancos de dados que estão neste servidor|instância
 
 CREATE database titanicDB; # criar próprio banco de dados dentro do SGBD
