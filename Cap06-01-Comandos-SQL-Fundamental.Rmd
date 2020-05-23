@@ -1,0 +1,165 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Introdução aos Bancos de Dados Relacionais e armazenagem de dados
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+# Um banco de dados relacional é um conjunto de arquivos físicos que armazenam os dados em formato estruturado, organizados em tabelas, que por sua vez são divididas em linhas e colunas. A criação de um banco de dados relacional é baseada na MODELAGEM RELACIONAL. 
+
+# Usamos linguagem SQL para manipular os dados em um banco de dados relacional para manipular os dados. Concentrar em aprender a linguagem SQL em si. 
+
+# A linguagem R suporta diversos bancos de dados relacionais através de PACOTES específicos para cada banco de dados. 
+
+# Usamos um SGBD|RDBMS (sistema gerenciador de bancos de dados) para gerenciar os arquivos do banco de dados. Na prática os bancos de dados são muito parecidos, o que vai mudar é o SGBD da forma que cada banco é gerenciado por seus DBAs. 
+
+# Temos uma tabela para cada tipo de informação diferente, em algum momentos queremos relacionar informações entre tabelas diferentes
+
+#db-engines.com - ranking dos principais bancos de dados do mercado 
+#armazenagem de dados para aplicações em geral são/ em mySQL
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+# Linguagem SQL é uma linguagem de cosulta a bancos de dados - não é uma linguagem de programação. Permite que os usuários acessem dados em sistemas de gerenciamento de bancos de dados relacionais. 
+
+# Permite a manipualação de dados armazenados em bancos de dados, a criação e remoção de objetos no banco de dados (tabelas, índices, visões, procedimentos armazenados), definir privilégios e restrições de acesso a dados sensíveis. 
+
+# Trabalhamos diretamente com os dados armazenados no banco de dados, interagindo através de um sistema SGBD. O sistema SGBD processa a query do usuário e retorna os dados solicitados. 
+
+# Atenção a como ajustar o Parser|Optimizer do SGBD para que a query seja executada de forma mais eficiente. 
+
+# Tudo que fazemos no banco de dados, passa pelo SGBD.
+# Oraacle utiliza PL/SQL
+# MS Access utiliza o JET SQL
+# MS SQL Server utiliza T-SQL
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+# Existem 3 tipos de instrução SQL:
+
+# Data Definition Language (DDL): linguagem responsável pela definição dos dados, criar objetos. Comandos para criar um objeto, tabela ou índica CREATE, alterar um objeto, tabela ALTER, e deletar um objeto DROP. CRIAR OBJETOS
+
+# Data Manipulation Language (DML): linguagem de manipulação de dados. Comandos para secionar dados SELECT, inserir dados INSERT, deletar datos DELETE, atualizar UPDATE. MANIPULAR DADOS
+
+# Data Control Language (DCL): definir permissões de acesso às tabelas, colunas e registros. TRABALHAR DIRETAMENTE COM PRIVILÉGIOS DE ACESSO. 
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+SHOW databases; # mostrará todos os bancos de dados que estão neste servidor|instância
+
+CREATE database titanicDB; # criar próprio banco de dados dentro do SGBD
+
+USE titanicDB; # a partir de agora use titanicDB para armazenar os dados
+
+# tabela será criada dentro do banco titanicDB:
+CREATE TABLE titanic ( # criar tabela, colunas e identificar o tipo para as variáveis    
+    pclass    char(1),    # char alocará espaço exato especificado
+    survived  char(1), 
+    name      varchar(30),  # varchar que varia
+    sex       char(6),
+    age       char(11),
+    home_dest varchar(200)
+    );
+
+# Botão direito na tabela titanic > Table Data Import Wizard
+    # Queremos realizar uma carga de dados com este comando do assistente Wizard
+        # Importar titanic.csv
+          # Selecionar tabela "titanic" já criada
+
+SELECT name, age, sex, pclass # selecionar variáveis específicas do dataset
+FROM titanic                  # de qual tabela
+WHERE age > 70                # filtrar por idade
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+# Podemos realizar agrupamento de variáveis
+
+SELECT pclass, survived, AVG(age) AS media  # selecionar e aplicar função 
+FROM titanic                                # de qual tabela
+GROUP BY  
+# quando utiliza uma função em select, é necessário AGRUPAR a variável
+# utilizamos o agrupamento das variáveis que não estão na função em si 
+# combinação entre sobreviventes(2) e classe3 (3) aplicando a média para 6 combinações
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+# Criando novos bancos de dados
+
+CREATE DATABASE cadastroDB;
+
+USE cadastroDB;
+
+CREATE TABLE funcionarios (
+    id      INT NOT NULL.                 # restrições, não é permitido nulo 
+    nome    VARCHAR (20) NOT NULL,        # restrições, não é permitido nulo 
+    idade   INT NOT NULL,                 # restrições, não é permitido nulo 
+    cidade  CHAR (25),
+    salario DECIMAL (18,2),
+    PRIMARY KEY (ID)                      # indica que ID tem que ter valor único, integridade referencial 
+    );  
+
+DESC funcionarios; # descrever|visualizar tabela criada
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO funcionarios (                # inserindo valores na tabela funcionarios
+    id, nome, idade, cidade, salario)     # nas respectivas oclunas
+VALUES(1, "Leonardo", 32, "Roma", 2000.00);   # estes valores 
+
+
+SELECT *                                  # visualizar tabela funcionários completa
+FROM funcionários; 
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+                                                          #MUITO CUIDADO - UPDATE
+
+UPDATE funcionarios                       # selecionar tabela para atualizar dado
+SET cidade = "LAZIO"                      # definir mudança
+WHERE id = 1;                             # especificar chave de identificação 
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+                                                          #MUITO CUIDADO - DELETE
+DELETE FROM funcionarios
+WHERE id = 6;                        
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+                                                          #VALORES ÚNICOS
+
+SELECT DISTINCT cidade
+FROM funcionarios; 
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+                                                          #CONTAGEM
+
+SELECT COUNT(*)                            # contar TUDO que existe na tabela funcioanrios
+FROM funcionarios;
+
+--------------------------------------------------------------------------------------------------------------------------------------
+    
+                                                          #FUNÇÕES
+
+SELECT cidade, SUM(salario)                # retorne a cidade e a soma de salário por cidade
+FROM funcionarios                          # a partir da tabela funcionarios
+GROUP BY cidade;                           # agrupar pela coluna que não está na função --- MUITO IMPORTANTE
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+                                                         #HAVING
+
+SELECT cidade, SUM(salario) 
+FROM funcionarios
+GROUP BY cidade                            # além de agrupar por cidade
+HAVING SUM(salario) > 2000;                # teremos um filtro após o agrupamento
+
+# podemos aplicar cláusula HAVING ao GROUP BY para filtrar pelo AGRUPAMENTO
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
